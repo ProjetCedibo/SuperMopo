@@ -14,7 +14,7 @@ public class Main
 
     System.out.print("\nChargement des donees...\n");
 
-    for(int i=0;i<listefichiers.length;i++)
+    for(int i=0;i<listefichiers.length;i=i+1)
     {
       if(listefichiers[i].endsWith(".csv")==true)
       {

@@ -208,9 +208,9 @@ public class Fenetre extends javax.swing.JFrame {
       if(courant != Integer.MAX_VALUE)
       {
         courant=courant+10;
-        if(courant+10>fichiers.get(anne).get(course).getNombreParticipants())
+        if(courant+10>fichiers.get(anne).get(course).getNbParticipants())
         {
-          courant=fichiers.get(anne).get(course).getNombreParticipants()-10;
+          courant=fichiers.get(anne).get(course).getNbParticipants()-10;
         }
         createTableauResultat();
       }
@@ -351,7 +351,7 @@ public class Fenetre extends javax.swing.JFrame {
       keyTemp = i.next();
       resultats[iTab][0]=palmares.get(keyTemp).toString();
       resultats[iTab][1]=keyTemp;
-      iTab++;
+      iTab=iTab+1;
     }
     
     jTable1.setModel(new javax.swing.table.DefaultTableModel(resultats, new String [] {"Nom", "Annee"}));
@@ -390,7 +390,7 @@ public class Fenetre extends javax.swing.JFrame {
   public void setTempEtNombreParticipant()
   {
     jLabel4.setText("Temp moyen = " + fichiers.get(anne).get(course).getDureeMoyenne());
-    jLabel5.setText("Nombre de participants = " + fichiers.get(anne).get(course).getNombreParticipants());
+    jLabel5.setText("Nombre de participants = " + fichiers.get(anne).get(course).getNbParticipants());
   }
 
   public void setCourant(int c)

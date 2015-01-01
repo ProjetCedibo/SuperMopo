@@ -95,7 +95,5 @@ public class Participation implements Comparable<Participation>
   
   public void setClassement_cat(String classement_cat){
 	this.classement_cat = classement_cat;
-  }
-  
-  
+  }  
 }

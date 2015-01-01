@@ -3,30 +3,30 @@ import java.util.*;
 
 public class Classement
 {
-  //Contient les donnees de chaque participant a cette course
+  //Contient les données de chaque participant à cette course
     
-  private ArrayList<Participation> donnees;
+  private ArrayList<Participation> classement;
 
   Classement(){
-    donnees = new ArrayList<>();
+    classement = new ArrayList<>();
   }
 
-  public void addDonnees(String [] items){
-    donnees.add(new Participation(items));
+  public void addDonnees(String [] menu){
+    classement.add(new Participation(menu));
   }
 
-  int getNombreParticipants(){
-    return donnees.size();
+  int getNbParticipants(){
+    return classement.size();
   }
 
   public String getDureeMoyenne(){
     double moyenne=0;
 
-    for(int i=0;i<donnees.size();i++){
-      moyenne=moyenne+(double)(donnees.get(i).getArrivee());
+    for(int i=0;i<classement.size();i=i+1){
+      moyenne=moyenne+(double)(classement.get(i).getArrivee());
     }
 
-    moyenne=moyenne/(double)(donnees.size());
+    moyenne=moyenne/(double)(classement.size());
 
     String heures   = String.valueOf((int)(moyenne/3600));
     String minutes  = String.valueOf((int)((moyenne % 3600) / 60));
@@ -45,11 +45,11 @@ public class Classement
   public Hashtable<String, Entier> getListeNation(){
     Hashtable<String, Entier> liste = new Hashtable<>();
 
-    for(int i=0;i<donnees.size();i++)    {
-        if(liste.get(donnees.get(i).getNation())==null){
-          liste.put(donnees.get(i).getNation(), new Entier());
+    for(int i=0;i<classement.size();i=i+1)    {
+        if(liste.get(classement.get(i).getNation())==null){
+          liste.put(classement.get(i).getNation(), new Entier());
         }
-        liste.get(donnees.get(i).getNation()).incremente();
+        liste.get(classement.get(i).getNation()).incremente();
     }
 
     return liste;
@@ -63,24 +63,24 @@ public class Classement
     * @see Donne
     */
   public List<Participation> getSubClassement(int debut, int fin){
-    Collections.sort(donnees);
-    return donnees.subList(debut, fin);
+    Collections.sort(classement);
+    return classement.subList(debut, fin);
   }
 
   public Participation getGagnant(){
-    Collections.sort(donnees);
-    return donnees.get(0);
+    Collections.sort(classement);
+    return classement.get(0);
   }
 
   /**
-   * Remplit un ArrayList de Donne avec les donnees du courreur avec le nom en parametre
+   * Remplit un ArrayList de Donne avec les classement du courreur avec le nom en parametre
    * @param nom nom du coureur recherche
    * @param data ArrayList a remplir
    */
   public void getDataOf(String nom, ArrayList<Participation> data){
-    for(int i=0;i<donnees.size();i++){
-      if(donnees.get(i).toString().contains(nom)){
-        data.add(donnees.get(i));
+    for(int i=0;i<classement.size();i=i+1){
+      if(classement.get(i).toString().contains(nom)){
+        data.add(classement.get(i));
       }
     }
   }

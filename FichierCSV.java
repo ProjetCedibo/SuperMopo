@@ -41,16 +41,16 @@ public class FichierCSV
       ligne = lecteurAvecBuffer.readLine(); //pour ingorer la premiere ligne
       while ((ligne = lecteurAvecBuffer.readLine()) != null)     
       {
-        String[] items=ligne.split(";");
+        String[] menu=ligne.split(";");
         Classement temp;
         
-        if((temp=classements.get(items[7]))==null) //selectionne le classement correspondat a cette course
+        if((temp=classements.get(menu[7]))==null) //selectionne le classement correspondat a cette course
         {
-          classements.put(items[7], new Classement()); //cree un nouveau classement si cette course n'existe pas
-          System.out.print("\nCourse = " + items[7]);
-          temp=classements.get(items[7]);             //permet de mettre a jour l'adresse de temp
+          classements.put(menu[7], new Classement()); //cree un nouveau classement si cette course n'existe pas
+          System.out.print("\nCourse = " + menu[7]);
+          temp=classements.get(menu[7]);             //permet de mettre a jour l'adresse de temp
         }
-        temp.addDonne(items);  //ajoute les donne sur cette course dans le classement selectionne
+        temp.addDonnees(menu);  //ajoute les donne sur cette course dans le classement selectionne
       }
       lecteurAvecBuffer.close();
     }
@@ -73,7 +73,7 @@ public class FichierCSV
     {
       keyTemp = i.next();
       System.out.print("\nCourse " + keyTemp + " " + annee + " : ");
-      System.out.print("-nombre de participants = " + classements.get(keyTemp).getNombreParticipants());
+      System.out.print("-nombre de participants = " + classements.get(keyTemp).getNbParticipants());
       System.out.print("\n                    -duree moyenne = " + classements.get(keyTemp).getDureeMoyenne());
       System.out.print("\n                    -nation represente = " + classements.get(keyTemp).getListeNation());
       System.out.print("\n                    -10 premiers = " + classements.get(keyTemp).getSubClassement(0, 10) + "\n");
