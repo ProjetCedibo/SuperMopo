@@ -231,10 +231,10 @@ public class Fenetre extends javax.swing.JFrame {
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt)
     {
-      ArrayList<Donne> data = Main.getDataOf(evt.getActionCommand());
+      ArrayList<Participation> data = Main.getDataOf(evt.getActionCommand());
       String [][] resultats = new String[data.size()][3];
-      Iterator<Donne> i = data.iterator();
-      Donne temp;
+      Iterator<Participation> i = data.iterator();
+      Participation temp;
       int iTab=0;
 
       System.out.print("\nRecherche du courreur \"" + evt.getActionCommand() + "\" " + data.size() + " resultats");
@@ -323,9 +323,9 @@ public class Fenetre extends javax.swing.JFrame {
   public void createTableauResultat()
   {
     String [][] resultats = new String[10][2];
-    List<Donne> list = fichiers.get(anne).get(course).getSubClassement(courant, courant+10);
-    Iterator<Donne> it = list.iterator();
-    Donne temp;
+    List<Participation> list = fichiers.get(anne).get(course).getSubClassement(courant, courant+10);
+    Iterator<Participation> it = list.iterator();
+    Participation temp;
  
     for(int i=0;i<10 && it.hasNext();i++)
     {
@@ -339,7 +339,7 @@ public class Fenetre extends javax.swing.JFrame {
 
   public void createTableauPalmares()
   {
-    Hashtable<String, Donne> palmares = Main.getPalmares(course);
+    Hashtable<String, Participation> palmares = Main.getPalmares(course);
     String [][] resultats = new String[palmares.size()][2];
     Set<String> s = palmares.keySet();
     Iterator<String> i = s.iterator();

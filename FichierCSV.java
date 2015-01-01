@@ -96,11 +96,11 @@ public class FichierCSV
    * @see Classement
    * @see Donne
    */
-  public Donne getFirst(String course)
+  public Participation getGagnant(String course)
   {
     if(classements.get(course)!=null) //regarde si cette course existe dans la Hashtable
     {
-      return classements.get(course).getFirst(); //retourne le premier si c'est le cas
+      return classements.get(course).getGagnant(); //retourne le premier si c'est le cas
     }
     return null; //retourne null sinon
   }
@@ -117,11 +117,11 @@ public class FichierCSV
   }
 
   /**
-   * Remplit un ArrayList de Donne avec les donnes du courreur avec le nom en parametre
+   * Remplit un ArrayList de Donne avec les donnees du courreur avec le nom en parametre
    * @param nom nom du coureur recherche
    * @param data ArrayList a remplir
    */
-  public void getDataOf(String nom, ArrayList<Donne> data)
+  public void getDataOf(String nom, ArrayList<Participation> data)
   {
     Set<String> s = classements.keySet(); //recupere l'ensemble des cle de la Hashtable
     Iterator<String> i = s.iterator();

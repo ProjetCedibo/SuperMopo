@@ -1,56 +1,32 @@
 import java.util.*;
 
-/**
-  * Classe permettat de representer le classement d'une course, 
-  * elle contient un ArrayList des donnes des participants a cette course
-  */
+
 public class Classement
 {
-  /**
-    * Contient les donnes de chaque participant a cette course
-    */
-  private ArrayList<Donne> donnes;
+  //Contient les donnees de chaque participant a cette course
+    
+  private ArrayList<Participation> donnees;
 
-  /**
-    * Constructeur par defaut, instancie l'ArrayList
-    */
-  Classement()
-  {
-    donnes = new ArrayList<>();
+  Classement(){
+    donnees = new ArrayList<>();
   }
 
- /**
-   * Ajoute une nouvelle donne a la course
-   * @param items tableau de String representant les donnes
-   */
-  public void addDonne(String [] items)
-  {
-    donnes.add(new Donne(items));
+  public void addDonnees(String [] items){
+    donnees.add(new Participation(items));
   }
 
-  /**
-    * Renvoi le nombre de participant
-    * @return Nombre de participant
-    */
-  int getNombreParticipants()
-  {
-    return donnes.size();
+  int getNombreParticipants(){
+    return donnees.size();
   }
 
-  /**
-    * Calcul et renvoi la duree moyenne sous forme d'une chaine
-    * @return chaine representant la duree moyenne sous la forme "X h X mn X s"
-    */
-  public String getDureeMoyenne()
-  {
+  public String getDureeMoyenne(){
     double moyenne=0;
 
-    for(int i=0;i<donnes.size();i++)
-    {
-      moyenne=moyenne+(double)(donnes.get(i).getArriveAsInt());
+    for(int i=0;i<donnees.size();i++){
+      moyenne=moyenne+(double)(donnees.get(i).getArrivee());
     }
 
-    moyenne=moyenne/(double)(donnes.size());
+    moyenne=moyenne/(double)(donnees.size());
 
     String heures   = String.valueOf((int)(moyenne/3600));
     String minutes  = String.valueOf((int)((moyenne % 3600) / 60));
@@ -66,17 +42,14 @@ public class Classement
     * @return une Hashtable<String, Entier>
     * @see Entier
     */
-  public Hashtable<String, Entier> getListeNation()
-  {
+  public Hashtable<String, Entier> getListeNation(){
     Hashtable<String, Entier> liste = new Hashtable<>();
 
-    for(int i=0;i<donnes.size();i++)    
-    {
-        if(liste.get(donnes.get(i).getNation())==null)
-        {
-          liste.put(donnes.get(i).getNation(), new Entier());
+    for(int i=0;i<donnees.size();i++)    {
+        if(liste.get(donnees.get(i).getNation())==null){
+          liste.put(donnees.get(i).getNation(), new Entier());
         }
-        liste.get(donnes.get(i).getNation()).incremente();
+        liste.get(donnees.get(i).getNation()).incremente();
     }
 
     return liste;
@@ -89,35 +62,25 @@ public class Classement
     * @return une Liste qui contient les Donne des 10 premiers courreurs
     * @see Donne
     */
-  public List<Donne> getSubClassement(int debut, int fin)
-  {
-    Collections.sort(donnes);
-    return donnes.subList(debut, fin);
+  public List<Participation> getSubClassement(int debut, int fin){
+    Collections.sort(donnees);
+    return donnees.subList(debut, fin);
+  }
+
+  public Participation getGagnant(){
+    Collections.sort(donnees);
+    return donnees.get(0);
   }
 
   /**
-    * Retourne le courreur arrive premier a cette course
-    * @return Donne du premier joueur
-    * @see Donne
-    */
-  public Donne getFirst()
-  {
-    Collections.sort(donnes);
-    return donnes.get(0);
-  }
-
-  /**
-   * Remplit un ArrayList de Donne avec les donnes du courreur avec le nom en parametre
+   * Remplit un ArrayList de Donne avec les donnees du courreur avec le nom en parametre
    * @param nom nom du coureur recherche
    * @param data ArrayList a remplir
    */
-  public void getDataOf(String nom, ArrayList<Donne> data)
-  {
-    for(int i=0;i<donnes.size();i++)
-    {
-      if(donnes.get(i).toString().contains(nom))
-      {
-        data.add(donnes.get(i));
+  public void getDataOf(String nom, ArrayList<Participation> data){
+    for(int i=0;i<donnees.size();i++){
+      if(donnees.get(i).toString().contains(nom)){
+        data.add(donnees.get(i));
       }
     }
   }

@@ -39,9 +39,9 @@ public class Main
     }    
   }
 
-  static Hashtable<String, Donne> getPalmares(String course)
+  static Hashtable<String, Participation> getPalmares(String course)
   {
-    Hashtable<String, Donne> palmares = new Hashtable<>();
+    Hashtable<String, Participation> palmares = new Hashtable<>();
     Set<String> s = fichiers.keySet();
     Iterator<String> i = s.iterator();
     String keyTemp;
@@ -49,9 +49,9 @@ public class Main
     while(i.hasNext())
     {
       keyTemp = i.next();
-      if(fichiers.get(keyTemp).getFirst(course)!=null)
+      if(fichiers.get(keyTemp).getGagnant(course)!=null)
       {
-        palmares.put(keyTemp, fichiers.get(keyTemp).getFirst(course));
+        palmares.put(keyTemp, fichiers.get(keyTemp).getGagnant(course));
       }
     }
 
@@ -83,16 +83,16 @@ public class Main
   }
 
   /**
-   * Remplit un ArrayList de Donne avec les donnes du courreur avec le nom en parametre
+   * Remplit un ArrayList de Donne avec les donnees du courreur avec le nom en parametre
    * @param nom nom du coureur recherche
    * @param data ArrayList a remplir
    */
-  static ArrayList<Donne> getDataOf(String nom)
+  static ArrayList<Participation> getDataOf(String nom)
   {
     Set<String> s = fichiers.keySet(); //recupere l'ensemble des cle de la Hashtable
     Iterator<String> i = s.iterator();
     String keyTemp;
-    ArrayList<Donne> data = new ArrayList<>();
+    ArrayList<Participation> data = new ArrayList<>();
 
     while(i.hasNext())
     {
