@@ -53,7 +53,7 @@ public class Entier
    */
   public void incremente()
   {
-    valeur=valeur+1;
+    valeur++;
   }
 
   /**

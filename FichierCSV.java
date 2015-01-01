@@ -41,16 +41,16 @@ public class FichierCSV
       ligne = lecteurAvecBuffer.readLine(); //pour ingorer la premiere ligne
       while ((ligne = lecteurAvecBuffer.readLine()) != null)     
       {
-        String[] menu=ligne.split(";");
+        String[] items=ligne.split(";");
         Classement temp;
         
-        if((temp=classements.get(menu[7]))==null) //selectionne le classement correspondat a cette course
+        if((temp=classements.get(items[7]))==null) //selectionne le classement correspondat a cette course
         {
-          classements.put(menu[7], new Classement()); //cree un nouveau classement si cette course n'existe pas
-          System.out.print("\nCourse = " + menu[7]);
-          temp=classements.get(menu[7]);             //permet de mettre a jour l'adresse de temp
+          classements.put(items[7], new Classement()); //cree un nouveau classement si cette course n'existe pas
+          System.out.print("\nCourse = " + items[7]);
+          temp=classements.get(items[7]);             //permet de mettre a jour l'adresse de temp
         }
-        temp.addDonnees(menu);  //ajoute les donne sur cette course dans le classement selectionne
+        temp.addDonne(items);  //ajoute les donne sur cette course dans le classement selectionne
       }
       lecteurAvecBuffer.close();
     }
@@ -73,7 +73,7 @@ public class FichierCSV
     {
       keyTemp = i.next();
       System.out.print("\nCourse " + keyTemp + " " + annee + " : ");
-      System.out.print("-nombre de participants = " + classements.get(keyTemp).getNbParticipants());
+      System.out.print("-nombre de participants = " + classements.get(keyTemp).getNombreParticipants());
       System.out.print("\n                    -duree moyenne = " + classements.get(keyTemp).getDureeMoyenne());
       System.out.print("\n                    -nation represente = " + classements.get(keyTemp).getListeNation());
       System.out.print("\n                    -10 premiers = " + classements.get(keyTemp).getSubClassement(0, 10) + "\n");
@@ -96,11 +96,11 @@ public class FichierCSV
    * @see Classement
    * @see Donne
    */
-  public Participation getGagnant(String course)
+  public Donne getFirst(String course)
   {
     if(classements.get(course)!=null) //regarde si cette course existe dans la Hashtable
     {
-      return classements.get(course).getGagnant(); //retourne le premier si c'est le cas
+      return classements.get(course).getFirst(); //retourne le premier si c'est le cas
     }
     return null; //retourne null sinon
   }
@@ -117,11 +117,11 @@ public class FichierCSV
   }
 
   /**
-   * Remplit un ArrayList de Donne avec les donnees du courreur avec le nom en parametre
+   * Remplit un ArrayList de Donne avec les donnes du courreur avec le nom en parametre
    * @param nom nom du coureur recherche
    * @param data ArrayList a remplir
    */
-  public void getDataOf(String nom, ArrayList<Participation> data)
+  public void getDataOf(String nom, ArrayList<Donne> data)
   {
     Set<String> s = classements.keySet(); //recupere l'ensemble des cle de la Hashtable
     Iterator<String> i = s.iterator();
